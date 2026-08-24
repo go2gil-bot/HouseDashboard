@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Michaela Hotels - Santorini Cliffside Rooms</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#0F5B57', container: '#004F4B' },
+                        on: { primary: '#FFFFFF', 'primary-container': '#A5F2EB' },
+                        secondary: { DEFAULT: '#B59B6A' },
+                        surface: { DEFAULT: '#FDFBF7', variant: '#F0EBE1' },
+                        'on-surface': { DEFAULT: '#1A1C18', variant: '#444743' },
+                        outline: { DEFAULT: '#747973', variant: '#C4C8C0' },
+                        status: {
+                            confirmed: '#0F5B57',
+                            pending: '#B59B6A',
+                            cancelled: '#9B3F40',
+                            checkout: '#60645D'
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Inter", "sans-serif"]
+                    },
+                    fontSize: {
+                        'label-sm': ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.03em', fontWeight: '500' }],
+                        'label-md': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.03em', fontWeight: '500' }],
+                        'body-md': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.015em', fontWeight: '400' }],
+                        'body-lg': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.01em', fontWeight: '400' }],
+                        'headline-sm': ['1.5rem', { lineHeight: '2rem', fontWeight: '400' }],
+                        'headline-md': ['1.75rem', { lineHeight: '2.25rem', fontWeight: '400' }],
+                        'display-sm': ['2.25rem', { lineHeight: '2.75rem', fontWeight: '400' }],
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFBF7; color: #1A1C18; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+        .hotel-image-gradient { background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface text-primary dark:text-primary font-headline text-label-md tracking-wide flex flex-col h-screen fixed left-0 top-0 py-6 border-r border-outline-variant w-64 z-20">
+<div class="px-6 mb-8 flex flex-col gap-2">
+<h1 class="font-headline text-xl font-bold tracking-tight text-primary dark:text-primary">Michaela Hotels</h1>
+<span class="text-on-surface-variant text-label-sm uppercase">Luxury CRM</span>
+</div>
+<ul class="flex flex-col gap-1 w-full">
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                    Customers
+                </a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">book_online</span>
+                    Bookings
+                </a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">flight</span>
+                    Flights
+                </a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-primary dark:text-primary font-bold border-r-4 border-primary bg-primary/5 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined fill-icon mr-3">hotel</span>
+                    Hotels
+                </a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">bar_chart</span>
+                    Reports
+                </a>
+</li>
+<li class="mt-auto">
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col h-screen relative">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md text-primary dark:text-primary font-body text-body-md border-b border-outline-variant flex justify-between items-center h-16 px-8 w-full sticky top-0 z-10">
+<div class="flex items-center">
+<div class="relative focus-within:ring-1 focus-within:ring-primary/50 transition-all rounded-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-variant/50 border-none rounded-md focus:ring-0 w-64 text-sm text-on-surface placeholder:text-on-surface-variant" placeholder="Search rooms, guests, bookings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-opacity focus:ring-1 ring-primary/50 rounded-full p-1"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-opacity focus:ring-1 ring-primary/50 rounded-full p-1"><span class="material-symbols-outlined">help</span></button>
+<img alt="Staff User Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="Professional headshot of a luxury hotel staff member, wearing a crisp uniform, subtle warm lighting, conveying hospitality and competence, light mode aesthetic, high-quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVcXtvJFzDWBIhYYa15odRQOw2akf1FcQII-NPmhmmkdTTpOkJS1HwxwwUkTV-g94yQsPmNXloTG40HMw5BtcAaH9FSM3fGs7h9xBoAvtMTuyVlSQWSlHo6VYgCtu14lummhCEnuI1NJOGWpLt-tlGa5kaxla8Aj615Vd7eQqEdG1p-yADwEUmtOTE7bJq6-po8sdM0VOKTXj2karD6bIeiClFUIlWFF5cyqwZ9mi61euNF_RCRBs-llwqjK7DT5q71zEw58KWgA6Q"/>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-8 flex flex-col gap-8 bg-surface">
+<!-- Context Header & Chips -->
+<div class="flex flex-col gap-6">
+<div class="flex items-baseline justify-between">
+<h2 class="font-headline text-display-sm font-semibold text-primary">Properties &amp; Rooms</h2>
+</div>
+<!-- Property Chips -->
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Lisbon Riverside</button>
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-label-md font-semibold whitespace-nowrap shadow-sm">Santorini Cliffside</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Zurich Alpine</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Tel Aviv Marina</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md whitespace-nowrap hover:bg-surface-variant transition-colors">Prague Old Town</button>
+</div>
+<!-- Property Summary Strip -->
+<div class="bg-surface-variant/40 rounded-lg p-4 flex items-center justify-between border border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-headline font-semibold text-primary">Santorini, Greece</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="material-symbols-outlined fill-icon text-sm">star</span>
+<span class="text-label-md text-on-surface ml-1">5 Stars</span>
+</div>
+<div class="w-px h-6 bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">bed</span>
+<span class="text-label-md text-on-surface">84 Rooms</span>
+</div>
+<div class="w-px h-6 bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-confirmed">pie_chart</span>
+<span class="text-label-md text-on-surface font-semibold">91% Occupancy</span>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="flex gap-4 items-center mt-2">
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+<select class="bg-surface border border-outline-variant text-body-md text-on-surface rounded-md py-1.5 pl-3 pr-8 focus:ring-primary focus:border-primary">
+<option>Room Type</option>
+<option>Standard</option>
+<option>Suite</option>
+</select>
+<select class="bg-surface border border-outline-variant text-body-md text-on-surface rounded-md py-1.5 pl-3 pr-8 focus:ring-primary focus:border-primary">
+<option>Occupancy</option>
+<option>2 Adults</option>
+<option>4 Adults</option>
+</select>
+<select class="bg-surface border border-outline-variant text-body-md text-on-surface rounded-md py-1.5 pl-3 pr-8 focus:ring-primary focus:border-primary">
+<option>Availability</option>
+<option>Available</option>
+<option>Occupied</option>
+<option>Maintenance</option>
+</select>
+</div>
+</div>
+<!-- Room Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-12">
+<!-- Card 1 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Standard Double" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A pristine modern hotel room interior featuring a double bed with crisp white linens, soft warm morning light casting gentle shadows, minimal aesthetic, deep teal accents, luxury hospitality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjeVdNKrfd0-oxtubYs1SpERryYKL7Poq3TTA5h67jGv1yd0aoMJRRvfr7pVS5tyGdT2WVOqlyAmO1tRNlzUX2jIenajk58UpQsmcr5Htthr4PpLhgoZfqt0G0A7xORjQoEIbjRp0JE-Uooi96HSwHV1bMAB_I9bTDVTA216E88jI5CekCio9Bbpxxb7tnAdX6fx47Ih3rZ8FFvkVB7Gjdu-z-PlIECemp0m9Kk3lgOxSMJF5IWILSzB5246AssdeLaeJZaGoZcdZu"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Standard Double</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 210 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 204</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-confirmed/10 text-status-confirmed text-[10px] font-bold uppercase tracking-wider border border-status-confirmed/20">Available</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Deluxe Sea View" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Luxurious hotel room with a stunning view of the Aegean Sea through large windows, elegant furniture, deep teal velvet accents, bright airy atmosphere, high-end architectural photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcnIuCl4lVjNUrzxnzOmNkLeJNgbWW-yG3QpNWGnEjoFZIYsYOtYY3IOlerZNhf3ikS3N4d106_Nt0lu2b_cZBSHRsxGdPg_6xn2ZkmR2JehpDSF2BaOoSJ3RG2zWg9oTnO82i7JwcdPsIm_nGxQQJ-m7EGNKGhLkrCf3hVZATIleqW4pWK05NuslEdj73F-alTRTBvyyMjS8Tox17jtkVvEliZ3G2OD8rJi0AV7Cx9eMjYNQi3-0oHMtMt72o3wr7PuAKBo4-DikI"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Deluxe Sea View</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 340 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 312</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-checkout/10 text-status-checkout text-[10px] font-bold uppercase tracking-wider border border-status-checkout/20">Occupied</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Terrace Deluxe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Hotel room featuring a private sun terrace with loungers, white Cycladic architecture, bright Mediterranean sunlight, calm premium tone, elegant luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH4zM69JZDIUeeF8kdKrpEmMX-O4MHQF2NwAn0NYXZTy0qDtSGh64hqLBsH1Lh81gHb0SC2SPrLhZfMagDFD0Hf4B6jsHwpEXyHevCpNY5WiFVr0hSngkHe5y8UW5RzJCLxNi9mjhr5vV6DQ_JqMn--T5e33k7U19Gh9k4NXqCSAlxMv9ZAz-LKFnu2CowIypJnKLSSxzotSsbJY3nQZvhYnCcTkkGBzuJ3p8BuPZl9K67jHHpgciBrmAn84syfjT-FsRPI0QY8Bpb"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Terrace Deluxe</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 420 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 105</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-confirmed/10 text-status-confirmed text-[10px] font-bold uppercase tracking-wider border border-status-confirmed/20">Available</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex flex-col gap-3 group opacity-75 grayscale-[30%]">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Junior Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sophisticated Junior Suite interior, featuring a small sitting area, plush textiles, muted earthy tones with teal highlights, well-lit but slightly subdued, premium hotel photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkSwyDReCmRshG530qHV0hJcSQDBbevS0aV_GZATE3q6lQ8cXfHakArIrgKezIUWCatnQ0BDm8TO1JgV8VNGldfCMH2HJCycHh6ToYmpU-VfTElrbHn0NEQsIzawHpkTPNMK8Q0mtPSK0Tn06KIeZz3BTA3sRdT-2Eag7l121znZmB3VcXhFlT0QxNlfd2Ra5BOfjW3vS0qLqLCPA7LdvYxnoMLVqQwawX-jp4I7HYOE9wUice9HgnutxEARbS7o-N2E8ZlMHsnuaq"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Junior Suite</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 520 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 415</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-pending/10 text-status-pending text-[10px] font-bold uppercase tracking-wider border border-status-pending/20">Maintenance</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-secondary/50 shadow-[0_0_15px_rgba(181,155,106,0.15)]">
+<div class="absolute top-2 right-2 z-10 text-secondary bg-surface/90 backdrop-blur rounded-full px-2 py-0.5 border border-secondary/30 flex items-center gap-1">
+<span class="material-symbols-outlined fill-icon text-[14px]">stars</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Premium</span>
+</div>
+<img alt="Presidential Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Opulent Presidential Suite, expansive living space, panoramic ocean views, luxurious furnishings, soft gold and deep teal accents, cinematic lighting, ultra-luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyax7tZzb1PZePJSL-0oSLOARYje1OLElTJyJwCngsANS8m8hkh1EQ64BCNFACt-fNxbbMZnuKWMvl5HXCp2u_WfZ2fKE-1pW0vf03IQ2DHxLdMbyeTIUiEV7j6r59HsaJzTTsbmzWlAHzaYWhBZlGeGzy5ywlHCUQwpACPNWereGWjv07K-7WxWP1hGkqDUEpE7rAes9qjZWBmvZVAVntDCgQzrrM3dXux_bllHIpwjYXX1iLbB_NHSPhdhFghzfSG4HSvLJJ8O1f"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Presidential Suite</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 1480 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 501</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">group</span> 4 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-checkout/10 text-status-checkout text-[10px] font-bold uppercase tracking-wider border border-status-checkout/20">Occupied</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Garden Twin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cozy ground-floor hotel room with twin beds, view of lush green gardens, bright morning light filtering through leaves, crisp white linens, calm and peaceful tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHjrwJowm-e7lMdGoZf96fkALi2Qa5uT-uEN9cZ4dRIExEgveJYZmv109j_N-e6XC0axz7UCR5U3nU2ZjphVGJAVuV_MIuLox5jo31kwA8vZDMA40Vze_pp_BhV0alax1btqBgSRV-RL2MsD5-er2APaMwfpmgTX--OFsC_-WZpZ_S8RQrkf-FoBLfZD_2X_R-OX8yBy_RlyhVMttN5sUvVKKECLUfZuheXCfzVtip3m6l2mnEfxUAim9wrcU7RyGgRDoAkd4wZLbw"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Garden Twin</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 260 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 008</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-confirmed/10 text-status-confirmed text-[10px] font-bold uppercase tracking-wider border border-status-confirmed/20">Available</span>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Family Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Spacious family suite in a luxury hotel, featuring a master bed and a separate alcove for children, bright and airy, practical yet elegant design, warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHzz4SdNOP4lgKcCwQs-3uYdRbGyv0vLevDmGnXeAwZqlWhlKLWJ9phLOk-efiEPNEOw2wABDlZO1xWoS1E03i4-geaDe-4fM6cUPQLbZBUYurRbKj8L9Nf9zlXJKm6AhZjNgmxGXoL4Ka1FfswPHZlkQFqxsUZuz6v4ClkVzDLECMKNqtNTApeFZknnX0mZFFOoJhHdvkvtlj9LisJdL2ktE0KWeEFTa-vP39dZ8h5HZS-4TCQefbjin9JAi6eeyB7MBBQonzz5UK"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Family Suite</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 480 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 220</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">family_restroom</span> 4 Adults, 2 Ch.</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-confirmed/10 text-status-confirmed text-[10px] font-bold uppercase tracking-wider border border-status-confirmed/20">Available</span>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-outline-variant/30">
+<img alt="Executive Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern Executive Suite interior, dedicated workspace area, king-size bed, sleek dark wood finishes with deep teal upholstery, professional and luxurious aesthetic, high-quality architectural photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9J9a5BYhLoLtqipz1g9Wp10gtB5vLNdKA6KrcnDF5WBxZCV0CUPkDFikR-zWuZ_bYg_aGCbWyrfAEebFdDA3u5xbbFKn8-9hgAbtd_lXuODyie01CW0qH3HqI2xsaU-8iUtFWjsVWi6-R-zIy_SWCxVBxvAV14FEcOs-8vY4PJNyrrt0BQ_zeSRroFGt8mK4xm7QlG_79SLon4jR0HHbAUZ-Eop7zaUMCnbYx7h_nN847W34-GwU_dmpYudENlN7CxWLhLaIO_GVK"/>
+<div class="absolute inset-0 hotel-image-gradient flex flex-col justify-end p-4">
+<h3 class="font-headline font-semibold text-white text-lg leading-tight">Executive Suite</h3>
+<span class="text-white/90 font-mono text-sm tracking-wide">EUR 660 / night</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-3">
+<span class="text-body-md font-semibold text-primary">Room 402</span>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> 2 Adults</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-status-checkout/10 text-status-checkout text-[10px] font-bold uppercase tracking-wider border border-status-checkout/20">Occupied</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
