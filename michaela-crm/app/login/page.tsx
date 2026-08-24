@@ -2,10 +2,13 @@
 
 import { useActionState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { signIn } from "@/app/auth/actions";
 
 export default function LoginPage() {
   const [error, action, pending] = useActionState(signIn, null);
+  const params = useSearchParams();
+  const next = params.get("next") ?? "/account";
 
   return (
     <div className="mx-auto max-w-md px-6 py-16">
@@ -15,6 +18,7 @@ export default function LoginPage() {
       </p>
 
       <form action={action} className="mt-8 space-y-4">
+        <input type="hidden" name="next" value={next} />
         <Field label="Email" name="email" type="email" required />
         <Field label="Password" name="password" type="password" required />
 

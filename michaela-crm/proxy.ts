@@ -25,6 +25,24 @@ export async function proxy(request: NextRequest) {
     },
   );
 
+  // Email confirmation links come back with ?code=. Supabase points them at the
+  // project's Site URL, so the code can land on any path — handling it here
+  // means no extra redirect URL has to be allow-listed in the dashboard.
+  const code = request.nextUrl.searchParams.get("code");
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+    const target = request.nextUrl.clone();
+    target.searchParams.delete("code");
+    target.pathname = error ? "/login" : "/account";
+    if (error) target.searchParams.set("error", "confirmation-failed");
+
+    const redirect = NextResponse.redirect(target);
+    // Carry over the session cookies the exchange just wrote.
+    response.cookies.getAll().forEach((cookie) => redirect.cookies.set(cookie));
+    return redirect;
+  }
+
   // Refreshes the auth token and keeps the cookie in sync.
   await supabase.auth.getUser();
 
@@ -32,5 +50,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };
