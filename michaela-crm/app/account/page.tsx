@@ -14,26 +14,23 @@ export default async function AccountPage({
 
   const supabase = await createClient();
 
-  // RLS returns only this guest's own row and bookings — no filtering here.
   const { data: customer } = await supabase
     .from("customers")
     .select("id, first_name, last_name, email, loyalty_tier, loyalty_points")
     .eq("user_id", user.id)
     .maybeSingle();
 
-  const { data: bookings } = await supabase
-    .from("bookings")
-    .select(
-      "id, booking_reference, check_in, check_out, guests, status, total_amount, hotels(name, city), rooms(room_type, room_number, image_url)",
-    )
-    .order("check_in", { ascending: false });
-
-  const { data: flights } = await supabase
-    .from("flights")
-    .select(
-      "id, flight_number, airline, direction, departure_airport, arrival_airport, departure_time, cabin_class, status",
-    )
-    .order("departure_time");
+  // RLS already hides other guests' bookings, but a staff member is allowed to
+  // see everything — and this page is the personal view, so scope it explicitly.
+  const { data: bookings } = customer
+    ? await supabase
+        .from("bookings")
+        .select(
+          "id, booking_reference, check_in, check_out, guests, status, total_amount, hotels(name, city), rooms(room_type, room_number, image_url)",
+        )
+        .eq("customer_id", customer.id)
+        .order("check_in", { ascending: false })
+    : { data: null };
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-12">
@@ -111,45 +108,6 @@ export default async function AccountPage({
         })}
       </div>
 
-      {!!flights?.length && (
-        <>
-          <h2 className="mt-10 text-xl text-teal">My flights</h2>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-line bg-surface">
-            <table className="w-full text-sm">
-              <thead className="border-b border-line text-left text-xs uppercase tracking-wide text-muted">
-                <tr>
-                  <th className="px-4 py-3">Flight</th>
-                  <th className="px-4 py-3">Route</th>
-                  <th className="px-4 py-3">Departs</th>
-                  <th className="px-4 py-3">Cabin</th>
-                  <th className="px-4 py-3">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {flights.map((f) => (
-                  <tr key={f.id} className="border-b border-line last:border-0">
-                    <td className="px-4 py-3">
-                      <div>{f.flight_number}</div>
-                      <div className="text-xs text-muted">{f.airline}</div>
-                    </td>
-                    <td className="px-4 py-3">
-                      {f.departure_airport} → {f.arrival_airport}
-                      <div className="text-xs text-muted">{f.direction}</div>
-                    </td>
-                    <td className="px-4 py-3">
-                      {new Date(f.departure_time).toLocaleString()}
-                    </td>
-                    <td className="px-4 py-3">{f.cabin_class}</td>
-                    <td className="px-4 py-3">
-                      <StatusPill status={f.status} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient, getUser, isStaff } from "@/lib/supabase/server";
 import { StatusPill, TierBadge } from "@/components/pills";
 
-const TABS = ["overview", "customers", "bookings", "flights"] as const;
+const TABS = ["overview", "customers", "bookings"] as const;
 type Tab = (typeof TABS)[number];
 
 export default async function AdminPage({
@@ -61,7 +61,6 @@ export default async function AdminPage({
         {tab === "overview" && <Overview supabase={supabase} />}
         {tab === "customers" && <Customers supabase={supabase} />}
         {tab === "bookings" && <Bookings supabase={supabase} />}
-        {tab === "flights" && <Flights supabase={supabase} />}
       </div>
     </div>
   );
@@ -70,12 +69,10 @@ export default async function AdminPage({
 type DB = Awaited<ReturnType<typeof createClient>>;
 
 async function Overview({ supabase }: { supabase: DB }) {
-  const [{ count: customers }, { count: bookings }, { count: flights }] =
-    await Promise.all([
-      supabase.from("customers").select("*", { count: "exact", head: true }),
-      supabase.from("bookings").select("*", { count: "exact", head: true }),
-      supabase.from("flights").select("*", { count: "exact", head: true }),
-    ]);
+  const [{ count: customers }, { count: bookings }] = await Promise.all([
+    supabase.from("customers").select("*", { count: "exact", head: true }),
+    supabase.from("bookings").select("*", { count: "exact", head: true }),
+  ]);
 
   const { data: rows } = await supabase
     .from("bookings")
@@ -94,10 +91,9 @@ async function Overview({ supabase }: { supabase: DB }) {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-3">
         <Kpi label="Customers" value={customers ?? 0} />
         <Kpi label="Bookings" value={bookings ?? 0} />
-        <Kpi label="Flight legs" value={flights ?? 0} />
         <Kpi label="Revenue" value={`€${Math.round(revenue).toLocaleString()}`} />
       </div>
 
@@ -193,52 +189,6 @@ async function Bookings({ supabase }: { supabase: DB }) {
               <StatusPill status={b.status} />
             </td>
             <td className="px-4 py-3 text-right">€{b.total_amount}</td>
-          </tr>
-        );
-      })}
-    </Table>
-  );
-}
-
-async function Flights({ supabase }: { supabase: DB }) {
-  const { data } = await supabase
-    .from("flights")
-    .select(
-      "id, flight_number, airline, direction, departure_airport, arrival_airport, departure_time, cabin_class, price, status, customers(first_name, last_name)",
-    )
-    .order("departure_time")
-    .limit(100);
-
-  return (
-    <Table
-      head={["Flight", "Guest", "Route", "Departs", "Cabin", "Price", "Status"]}
-    >
-      {data?.map((f) => {
-        const c = f.customers as unknown as {
-          first_name: string;
-          last_name: string;
-        } | null;
-        return (
-          <tr key={f.id} className="border-b border-line last:border-0">
-            <td className="px-4 py-3">
-              <div>{f.flight_number}</div>
-              <div className="text-xs text-muted">{f.airline}</div>
-            </td>
-            <td className="px-4 py-3">
-              {c ? `${c.first_name} ${c.last_name}` : "—"}
-            </td>
-            <td className="px-4 py-3 text-muted">
-              {f.departure_airport} → {f.arrival_airport}
-              <div className="text-xs">{f.direction}</div>
-            </td>
-            <td className="px-4 py-3 text-muted">
-              {new Date(f.departure_time).toLocaleDateString()}
-            </td>
-            <td className="px-4 py-3 text-muted">{f.cabin_class}</td>
-            <td className="px-4 py-3 text-right">€{f.price}</td>
-            <td className="px-4 py-3">
-              <StatusPill status={f.status} />
-            </td>
           </tr>
         );
       })}
