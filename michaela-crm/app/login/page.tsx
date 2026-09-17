@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "@/app/auth/actions";
+import { t } from "@/lib/i18n";
 
 export default function LoginPage() {
   const [error, action, pending] = useActionState(signIn, null);
@@ -12,34 +13,34 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md px-6 py-16">
-      <h1 className="text-3xl text-teal">Sign in</h1>
+      <h1 className="text-3xl text-teal">{t.signIn}</h1>
       <p className="mt-2 text-sm text-muted">
-        Guests see their own bookings. Staff accounts also get the admin console.
+        {t.loginLead}
       </p>
 
       <form action={action} className="mt-8 space-y-4">
         <input type="hidden" name="next" value={next} />
-        <Field label="Email" name="email" type="email" required />
-        <Field label="Password" name="password" type="password" required />
+        <Field label={t.email} name="email" type="email" required />
+        <Field label={t.password} name="password" type="password" required />
 
         {error && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+          <p className="rounded-lg bg-danger-soft px-3 py-2 text-sm text-danger-ink">
             {error}
           </p>
         )}
 
         <button
           disabled={pending}
-          className="w-full rounded-full bg-teal px-4 py-2.5 text-white disabled:opacity-60"
+          className="w-full rounded-full bg-teal px-4 py-2.5 text-on-teal disabled:opacity-60"
         >
-          {pending ? "Signing in…" : "Sign in"}
+          {pending ? t.signingIn : t.signIn}
         </button>
       </form>
 
       <p className="mt-6 text-sm text-muted">
-        No account?{" "}
+        {t.noAccount}{" "}
         <Link href="/signup" className="text-teal underline">
-          Register
+          {t.register}
         </Link>
       </p>
     </div>
@@ -55,7 +56,7 @@ function Field({
       <span className="text-xs uppercase tracking-wide text-muted">{label}</span>
       <input
         {...props}
-        className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 outline-none focus:border-teal"
+        className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 focus:border-teal"
       />
     </label>
   );

@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { createBooking } from "@/app/book/actions";
+import { t } from "@/lib/i18n";
 
 type Hotel = {
   id: number;
@@ -65,10 +66,9 @@ export default async function HomePage({
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
-      <h1 className="text-4xl text-teal">Find a room</h1>
+      <h1 className="text-4xl text-teal">{t.findRoom}</h1>
       <p className="mt-2 max-w-xl text-muted">
-        Five boutique properties. Availability is checked live against real
-        bookings — no account needed to look.
+        {t.homeLead}
       </p>
 
       <form
@@ -77,12 +77,12 @@ export default async function HomePage({
       >
         <label className="sm:col-span-2">
           <span className="text-xs uppercase tracking-wide text-muted">
-            Property
+            {t.property}
           </span>
           <select
             name="hotel"
             defaultValue={hotelId}
-            className="mt-1 w-full rounded-lg border border-line px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 focus:border-teal"
           >
             {hotelList.map((h) => (
               <option key={h.id} value={h.id}>
@@ -94,31 +94,31 @@ export default async function HomePage({
 
         <label>
           <span className="text-xs uppercase tracking-wide text-muted">
-            Check in
+            {t.checkIn}
           </span>
           <input
             type="date"
             name="from"
             defaultValue={from}
-            className="mt-1 w-full rounded-lg border border-line px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 focus:border-teal"
           />
         </label>
 
         <label>
           <span className="text-xs uppercase tracking-wide text-muted">
-            Check out
+            {t.checkOut}
           </span>
           <input
             type="date"
             name="to"
             defaultValue={to}
-            className="mt-1 w-full rounded-lg border border-line px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 focus:border-teal"
           />
         </label>
 
         <label>
           <span className="text-xs uppercase tracking-wide text-muted">
-            Guests
+            {t.guests}
           </span>
           <input
             type="number"
@@ -126,12 +126,12 @@ export default async function HomePage({
             min={1}
             max={8}
             defaultValue={guests}
-            className="mt-1 w-full rounded-lg border border-line px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 focus:border-teal"
           />
         </label>
 
-        <button className="rounded-full bg-teal px-6 py-2.5 text-white sm:col-span-5 sm:justify-self-start">
-          Search availability
+        <button className="rounded-full bg-teal px-6 py-2.5 text-on-teal sm:col-span-5 sm:justify-self-start">
+          {t.searchAvailability}
         </button>
       </form>
 
@@ -164,17 +164,19 @@ export default async function HomePage({
       {searched && (
         <section className="mt-10">
           <h2 className="text-2xl text-teal">
-            {rooms.length} room{rooms.length === 1 ? "" : "s"} available
+            {t.roomsAvailable(rooms.length)}
           </h2>
           <p className="text-sm text-muted">
-            {selected?.name} · {from} → {to} · {guests} guest
-            {guests === 1 ? "" : "s"}
+            <bdi dir="auto">{selected?.name}</bdi> ·{" "}
+            <bdi dir="ltr" className="tabular-nums">
+              {from} → {to}
+            </bdi>{" "}
+            · {t.guestCount(guests)}
           </p>
 
           {rooms.length === 0 && (
-            <p className="mt-6 rounded-xl bg-gold-soft px-4 py-3 text-sm">
-              Nothing free for those dates. Try a different property or shift
-              the dates.
+            <p className="mt-6 rounded-xl bg-gold-soft px-4 py-3 text-sm text-gold-ink">
+              {t.nothingFree}
             </p>
           )}
 
@@ -193,17 +195,24 @@ export default async function HomePage({
                 <div className="space-y-2 p-4">
                   <div className="flex items-baseline justify-between gap-2">
                     <h3 className="text-lg text-teal">{r.room_type}</h3>
-                    <span className="text-sm text-muted">#{r.room_number}</span>
+                    {/* Latin runs are isolated so they survive an RTL page. */}
+                    <bdi className="text-sm text-muted">#{r.room_number}</bdi>
                   </div>
-                  <p className="text-sm text-muted">{r.description}</p>
-                  <p className="text-sm">
-                    <span className="font-medium">€{r.nightly_rate}</span>
-                    <span className="text-muted"> / night · up to </span>
-                    <span className="font-medium">{r.max_occupancy}</span>
-                    <span className="text-muted"> guests</span>
+                  <p className="text-sm text-muted" dir="auto">
+                    {r.description}
                   </p>
-                  <p className="rounded-lg bg-teal-soft px-3 py-1.5 text-sm">
-                    {r.nights} nights · <strong>€{r.total_price}</strong> total
+                  <p className="text-sm">
+                    <bdi className="font-medium">€{r.nightly_rate}</bdi>
+                    <span className="text-muted">{t.perNight}</span>
+                    <bdi className="font-medium">{r.max_occupancy}</bdi>
+                    <span className="text-muted">{t.guestsWord}</span>
+                  </p>
+                  <p className="rounded-lg bg-teal-soft px-3 py-1.5 text-sm text-teal">
+                    {t.nights(r.nights)} ·{" "}
+                    <bdi>
+                      <strong>€{r.total_price}</strong>
+                    </bdi>{" "}
+                    {t.totalWord}
                   </p>
 
                   <form action={createBooking}>
@@ -217,8 +226,8 @@ export default async function HomePage({
                       name="total_price"
                       value={r.total_price}
                     />
-                    <button className="mt-2 w-full rounded-full bg-teal px-4 py-2 text-sm text-white hover:opacity-90">
-                      Book this room
+                    <button className="mt-2 w-full rounded-full bg-teal px-4 py-2 text-sm text-on-teal hover:opacity-90">
+                      {t.bookThisRoom}
                     </button>
                   </form>
                 </div>

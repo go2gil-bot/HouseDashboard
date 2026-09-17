@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient, getUser } from "@/lib/supabase/server";
 import { StatusPill, TierBadge } from "@/components/pills";
+import { t } from "@/lib/i18n";
 
 export default async function AccountPage({
   searchParams,
@@ -35,35 +36,40 @@ export default async function AccountPage({
   return (
     <div className="mx-auto max-w-5xl px-6 py-12">
       {params.booked && (
-        <p className="mb-6 rounded-xl bg-teal-soft px-4 py-3 text-sm">
-          Booking created. Front desk will confirm it shortly.
+        <p className="mb-6 rounded-xl bg-teal-soft px-4 py-3 text-sm text-teal">
+          {t.bookingCreated}
         </p>
       )}
       {params.error && (
-        <p className="mb-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="mb-6 rounded-xl bg-danger-soft px-4 py-3 text-sm text-danger-ink">
           {params.error}
         </p>
       )}
 
-      <h1 className="text-3xl text-teal">
-        {customer ? `${customer.first_name} ${customer.last_name}` : "My account"}
+      <h1 className="text-3xl text-teal" dir="auto">
+        {customer ? `${customer.first_name} ${customer.last_name}` : t.myAccount}
       </h1>
       <p className="mt-1 flex items-center gap-3 text-sm text-muted">
-        {user.email}
+        <bdi>{user.email}</bdi>
         {customer && (
           <>
             <TierBadge tier={customer.loyalty_tier} />
-            <span>{customer.loyalty_points.toLocaleString()} points</span>
+            <span>
+              <bdi className="tabular-nums">
+                {customer.loyalty_points.toLocaleString()}
+              </bdi>{" "}
+              {t.points}
+            </span>
           </>
         )}
       </p>
 
-      <h2 className="mt-10 text-xl text-teal">My bookings</h2>
+      <h2 className="mt-10 text-xl text-teal">{t.myBookings}</h2>
       {!bookings?.length && (
         <p className="mt-3 text-sm text-muted">
-          Nothing booked yet.{" "}
+          {t.nothingBooked}{" "}
           <Link href="/" className="text-teal underline">
-            Search availability
+            {t.searchAvailability}
           </Link>
         </p>
       )}
@@ -91,17 +97,25 @@ export default async function AccountPage({
               )}
               <div className="flex-1 p-4">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="font-mono text-xs text-muted">
+                  <bdi className="font-mono text-xs text-muted">
                     {b.booking_reference}
-                  </span>
+                  </bdi>
                   <StatusPill status={b.status} />
                 </div>
-                <h3 className="mt-1 text-lg text-teal">{hotel?.name}</h3>
+                <h3 className="mt-1 text-lg text-teal" dir="auto">
+                  {hotel?.name}
+                </h3>
                 <p className="text-sm text-muted">
-                  {room?.room_type} #{room?.room_number} · {b.check_in} →{" "}
-                  {b.check_out} · {b.guests} guests
+                  <bdi dir="auto">{room?.room_type}</bdi>{" "}
+                  <bdi>#{room?.room_number}</bdi> ·{" "}
+                  <bdi dir="ltr" className="tabular-nums">
+                    {b.check_in} → {b.check_out}
+                  </bdi>{" "}
+                  · {t.guestCount(b.guests)}
                 </p>
-                <p className="mt-1 text-sm font-medium">€{b.total_amount}</p>
+                <p className="mt-1 text-sm font-medium">
+                  <bdi className="tabular-nums">€{b.total_amount}</bdi>
+                </p>
               </div>
             </article>
           );

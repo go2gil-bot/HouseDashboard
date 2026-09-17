@@ -1,12 +1,35 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import {
+  Frank_Ruhl_Libre,
+  Heebo,
+  Inter,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import { SiteNav } from "@/components/site-nav";
+import { DIR, LOCALE } from "@/lib/i18n";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+// adjustFontFallback is off on the two Latin faces on purpose. Next's metric
+// fallback is Arial, which HAS Hebrew glyphs — with it in the stack, Hebrew
+// would render in Arial instead of falling through to Heebo below.
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  adjustFontFallback: false,
+});
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  adjustFontFallback: false,
+});
+
+const heebo = Heebo({
+  variable: "--font-heebo",
+  subsets: ["hebrew", "latin"],
+});
+const frankRuhl = Frank_Ruhl_Libre({
+  variable: "--font-frank-ruhl",
+  subsets: ["hebrew", "latin"],
 });
 
 export const metadata: Metadata = {
@@ -21,8 +44,9 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
+      lang={LOCALE}
+      dir={DIR}
+      className={`${inter.variable} ${playfair.variable} ${heebo.variable} ${frankRuhl.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SiteNav />
