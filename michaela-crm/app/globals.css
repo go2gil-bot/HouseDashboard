@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Tokens — Michaela Design System.
+   Light is this app's original palette. Dark is the system's dark theme.
+   Every token is redefined per theme, so the utilities below never need a
+   dark: variant: bg-surface, text-muted and the rest flip on their own. */
+
+:root {
+  /* So native controls — selects, date pickers, scrollbars — follow the theme. */
+  color-scheme: light dark;
+
+  --background: #faf9f6;
+  --surface: #ffffff;
+  --foreground: #1a1a1a;
+  --muted: #6b7280;
+  --line: #e5e3dd;
+
+  --teal: #0f5b57;
+  --teal-soft: #e6efee;
+  --on-teal: #ffffff;
+
+  /* Darkened from the original #c9a227, which was 2.30:1 against the page —
+     under the 3:1 a border that carries meaning needs. 3.30:1 here. */
+  --gold: #a8851f;
+  --gold-soft: #f7f0da;
+  /* Darkened from the original #8a6d10, which was 4.31:1 on gold-soft —
+     under the 4.5:1 the 12px status pills need. 5.31:1 here. */
+  --gold-ink: #7a5f0d;
+
+  --danger-soft: #fef2f2;
+  --danger-ink: #b91c1c;
+
+  --neutral-soft: #f3f4f6;
+  --neutral-ink: #4b5563;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #111917;
+    --surface: #18211f;
+    --foreground: #f2efe9;
+    --muted: #9aa7a3;
+    --line: #2a3532;
+
+    --teal: #5fbdb2;
+    --teal-soft: #17302c;
+    --on-teal: #06211f;
+
+    --gold: #d9b64a;
+    --gold-soft: #2e2716;
+    --gold-ink: #e5c76b;
+
+    --danger-soft: #331a1a;
+    --danger-ink: #f5a5a5;
+
+    --neutral-soft: #212a28;
+    --neutral-ink: #b9c4c1;
+  }
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --background: #111917;
+  --surface: #18211f;
+  --foreground: #f2efe9;
+  --muted: #9aa7a3;
+  --line: #2a3532;
+
+  --teal: #5fbdb2;
+  --teal-soft: #17302c;
+  --on-teal: #06211f;
+
+  --gold: #d9b64a;
+  --gold-soft: #2e2716;
+  --gold-ink: #e5c76b;
+
+  --danger-soft: #331a1a;
+  --danger-ink: #f5a5a5;
+
+  --neutral-soft: #212a28;
+  --neutral-ink: #b9c4c1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-on-teal: var(--on-teal);
+
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-ink: var(--gold-ink);
+
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-ink: var(--danger-ink);
+
+  --color-neutral-soft: var(--neutral-soft);
+  --color-neutral-ink: var(--neutral-ink);
+
+  /* Latin face first, Hebrew face second. Inter and Playfair have no Hebrew
+     glyphs, so Hebrew characters fall through to Heebo and Frank Ruhl Libre
+     one by one — which keeps prices, dates and email addresses in the
+     system's own Latin even on a Hebrew page. */
+  --font-sans: var(--font-inter), var(--font-heebo);
+  --font-display: var(--font-playfair), var(--font-frank-ruhl);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), var(--font-heebo), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-playfair), var(--font-frank-ruhl), Georgia, serif;
+}
+
+/* Hebrew has no case and no ascenders: at an identical size it reads denser
+   and flatter, so the scale steps up and the leading opens out. No uppercase
+   and no letter-spacing — both do real damage to Hebrew word shapes. */
+:root[lang="he"] {
+  line-height: 1.6;
+}
+
+:root[lang="he"] .uppercase {
+  text-transform: none;
+  font-weight: 500;
+}
+
+:root[lang="he"] .tracking-wide,
+:root[lang="he"] .tracking-widest {
+  letter-spacing: normal;
+}
+
+:root[lang="he"] .text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+}
+
+:root[lang="he"] .text-sm {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+:root[lang="he"] .italic {
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* The system's focus rule: keep the teal border swap on inputs and add a
+   ring, because a 1px border change alone is a weak indicator for keyboard
+   users. 6.9:1 in light and 8.0:1 in dark, over the 3:1 a focus ring needs. */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}

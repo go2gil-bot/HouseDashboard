@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Michaela Hotels CRM - Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Public Sans (Headline) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F5B57', // Deep Teal
+                        'primary-container': '#E0F2F1',
+                        'on-primary-container': '#003331',
+                        surface: '#F8F9FA', // Off-white
+                        'surface-container-lowest': '#FFFFFF',
+                        'surface-container-low': '#F1F3F4',
+                        'on-surface': '#202124',
+                        'on-surface-variant': '#5F6368',
+                        'outline-variant': '#DADCE0',
+                        accent: {
+                            gold: '#C5A880', // Muted Gold
+                            green: '#34A853',
+                            red: '#EA4335',
+                            grey: '#9AA0A6'
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden antialiased">
+<!-- SideNavBar (Predicted Component) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col h-full py-6 z-50">
+<!-- Brand Header -->
+<div class="px-6 mb-8 flex flex-col items-start gap-2">
+<img alt="Michaela Hotels Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XIboY7IlDEBwjB4KqiFwf5fZ5btLG5nrlQLIaCHXNHl2LoHbJV1G2tsYlP0QGGQ5BSZOIBuC9VV_yTxAJ_5R7diMLTW9slGI-g3eC3UldgKfM8VuSD6b5UUPuENreNvuQCIU2PpEwFoQ2r5mbnpXkc-UXALjYJW6vHEsDFWeijz-cL7vfOtzZOELNjGhOgLUWfzvEzNrSQXnyrlzvBjiOGV15cTxMR4E_pUdtA0zbcQkoD8dTMK0paJ5i5"/>
+<div>
+<h1 class="font-headline font-bold text-xl text-primary">Michaela Hotels</h1>
+<p class="font-body text-xs text-on-surface-variant">Luxury CRM Admin</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col flex-1 px-3 space-y-1">
+<!-- Active Tab: Dashboard -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-primary/5 transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body text-label-md">Dashboard</span>
+</a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body text-label-md">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">book_online</span>
+<span class="font-body text-label-md">Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">flight</span>
+<span class="font-body text-label-md">Flights</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">hotel</span>
+<span class="font-body text-label-md">Hotels</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-body text-label-md">Reports</span>
+</a>
+</li>
+</ul>
+<!-- Bottom Settings -->
+<div class="px-3 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body text-label-md">Settings</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar (Predicted Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-outline-variant flex justify-between items-center h-16 px-8 z-40">
+<!-- Search Bar (on_left) -->
+<div class="flex-1 max-w-md focus-within:ring-2 focus-within:ring-primary rounded-full px-4 py-2 bg-surface-container-lowest border border-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full font-body placeholder:text-on-surface-variant/70 text-on-surface" placeholder="Search guests, bookings, references..." type="text"/>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-accent-red rounded-full border-2 border-surface"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<button class="flex items-center gap-3 cursor-pointer active:scale-95 rounded-full hover:bg-surface-container-low pr-3 transition-colors">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of an elegant female hospitality executive in a sleek, softly lit corporate environment. The portrait is crisp, high-resolution, featuring natural skin tones and a warm, approachable smile, set against a blurred light-mode background of a modern luxury hotel lobby. The lighting is flattering and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdteJ50ieX3vaM8A6tJz71JOyn7RexpJnSJ2KoS1RiFnPT3Nixc4HWYS19b-nGX0wjCXhrpQr0uHhd5fJb0qbnskRxVQe2QURQvOVPig5qDZ6Med-mVX_5ShnCnpvpnEeL1YgO0tmYYnEvEsGRig2T35ke6s4kgyA-s817S92QR_IjoGCc9mIDulzAM8CJmI5DPRpWsvfJP7rAF8q_TEHf7Kb1Al4BELotvuMGfaB0oQRpIpKnRsjqoyJt43yIYJe141NPZWV_7746"/>
+<span class="font-body text-body-md font-medium">Eleanor Vance</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-8 min-h-screen bg-surface-container-lowest">
+<!-- Header -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline font-semibold text-2xl text-on-surface">Dashboard Overview</h2>
+<p class="font-body text-sm text-on-surface-variant mt-1">Today's snapshot across all luxury properties.</p>
+</div>
+<button class="bg-primary text-white px-5 py-2.5 rounded-lg font-body font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Booking
+            </button>
+</div>
+<!-- KPI Section (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Occupancy -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">key</span>
+</div>
+<div class="mb-4">
+<p class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-semibold">Occupancy</p>
+</div>
+<div>
+<div class="flex items-baseline gap-3">
+<h3 class="font-headline font-bold text-4xl text-on-surface">78%</h3>
+</div>
+<div class="mt-2 flex items-center gap-1 text-xs font-medium text-accent-green bg-accent-green/10 w-max px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        +2.4% from last week
+                    </div>
+</div>
+</div>
+<!-- ADR -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">euro</span>
+</div>
+<div class="mb-4">
+<p class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-semibold">ADR</p>
+</div>
+<div>
+<div class="flex items-baseline gap-3">
+<h3 class="font-headline font-bold text-4xl text-on-surface">214</h3>
+<span class="text-on-surface-variant font-body">EUR</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-xs font-medium text-accent-green bg-accent-green/10 w-max px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        +5.1% from last month
+                    </div>
+</div>
+</div>
+<!-- Bookings This Week -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-accent-gold">calendar_month</span>
+</div>
+<div class="mb-4">
+<p class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-semibold">Bookings This Week</p>
+</div>
+<div>
+<div class="flex items-baseline gap-3">
+<h3 class="font-headline font-bold text-4xl text-on-surface">143</h3>
+</div>
+<div class="mt-2 flex items-center gap-1 text-xs font-medium text-accent-red bg-accent-red/10 w-max px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+                        -3.0% from last week
+                    </div>
+</div>
+</div>
+<!-- Active Guests -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">person</span>
+</div>
+<div class="mb-4">
+<p class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-semibold">Active Guests</p>
+</div>
+<div>
+<div class="flex items-baseline gap-3">
+<h3 class="font-headline font-bold text-4xl text-on-surface">512</h3>
+</div>
+<div class="mt-2 flex items-center gap-1 text-xs font-medium text-primary bg-primary/10 w-max px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                        +12 from yesterday
+                    </div>
+</div>
+</div>
+</section>
+<!-- Main Content Area: Analytics & Side Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Analytics: Revenue by Property (2/3 width) -->
+<div class="lg:col-span-2 bg-surface rounded-xl border border-outline-variant/50 p-6 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline font-semibold text-lg text-on-surface">Revenue by Property</h3>
+<select class="bg-surface-container-low border-none text-sm font-body text-on-surface-variant rounded-md py-1.5 px-3 focus:ring-1 focus:ring-primary cursor-pointer">
+<option>This Month</option>
+<option>Last Month</option>
+<option>QTD</option>
+</select>
+</div>
+<!-- Pseudo Bar Chart -->
+<div class="flex-1 flex flex-col justify-center space-y-5">
+<!-- Lisbon -->
+<div>
+<div class="flex justify-between text-sm font-body mb-1">
+<span class="font-medium text-on-surface">Lisbon Riverside</span>
+<span class="text-on-surface-variant text-right">€342,000</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Santorini -->
+<div>
+<div class="flex justify-between text-sm font-body mb-1">
+<span class="font-medium text-on-surface">Santorini Cliffside</span>
+<span class="text-on-surface-variant text-right">€298,500</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-primary/80 h-2 rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<!-- Zurich -->
+<div>
+<div class="flex justify-between text-sm font-body mb-1">
+<span class="font-medium text-on-surface">Zurich Alpine</span>
+<span class="text-on-surface-variant text-right">€275,200</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-primary/60 h-2 rounded-full" style="width: 68%"></div>
+</div>
+</div>
+<!-- Tel Aviv -->
+<div>
+<div class="flex justify-between text-sm font-body mb-1">
+<span class="font-medium text-on-surface">Tel Aviv Marina</span>
+<span class="text-on-surface-variant text-right">€210,000</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-primary/50 h-2 rounded-full" style="width: 52%"></div>
+</div>
+</div>
+<!-- Prague -->
+<div>
+<div class="flex justify-between text-sm font-body mb-1">
+<span class="font-medium text-on-surface">Prague Old Town</span>
+<span class="text-on-surface-variant text-right">€185,400</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-2">
+<div class="bg-accent-gold/80 h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel: Arrivals Today (1/3 width) -->
+<div class="bg-surface rounded-xl border border-outline-variant/50 p-0 shadow-sm flex flex-col overflow-hidden">
+<div class="p-6 pb-4 border-b border-outline-variant/50 bg-surface flex justify-between items-center">
+<h3 class="font-headline font-semibold text-lg text-on-surface">Arrivals Today</h3>
+<span class="bg-accent-gold/20 text-accent-gold text-xs font-bold px-2 py-1 rounded-md">24 Total</span>
+</div>
+<div class="divide-y divide-outline-variant/30 flex-1 overflow-y-auto">
+<!-- Guest 1 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors flex items-start gap-3">
+<img alt="Welcome amenity" class="w-10 h-10 rounded-full object-cover" data-alt="A macro shot of a luxurious VIP hotel welcome amenity setup. A perfectly chilled bottle of champagne sits in a silver ice bucket beside two crystal flutes. A handwritten welcome note rests on a silver tray. Soft, warm natural light filters through sheer curtains, emphasizing the premium textures and creating an inviting, opulent light-mode atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGcFn9L3A8dtEQqF3urSCQgh95n4fNvcBTzjuKeJD8fnwxHCt_GU9KLCygne60QPL9epkvQCFnlU4MWWrejqaJNgU9sYHG_M1HBbx1HUEiKwDC13UY8JAwSi-aHleO2yNyixwUGWfDlGetMrQpTU5mmbjVk457fzBohDUEa4YfcO_0ZEiYZ1WQOj1hqmceL4siIGDZy00V_RYKbB-K-Jfia_STd658d9pkGVmTm5nSKARKKKZRN4XduyrCEv3gClF-MjNbUaGM_0vP"/>
+<div class="flex-1">
+<h4 class="font-body font-medium text-sm text-on-surface">Mr. Julian &amp; Mrs. Claire Thorne</h4>
+<p class="text-xs text-on-surface-variant mt-0.5">Lisbon Riverside • Penthouse Suite</p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] uppercase font-bold text-accent-gold border border-accent-gold px-1.5 py-0.5 rounded shadow-sm bg-surface">Platinum</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> ETA: 14:30</span>
+</div>
+</div>
+</div>
+<!-- Guest 2 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold">
+                            DK
+                        </div>
+<div class="flex-1">
+<h4 class="font-body font-medium text-sm text-on-surface">Dr. Aisha Khan</h4>
+<p class="text-xs text-on-surface-variant mt-0.5">Zurich Alpine • Deluxe Balcony</p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] uppercase font-bold text-surface border border-outline-variant px-1.5 py-0.5 rounded bg-gradient-to-r from-gray-300 to-gray-400">Silver</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> ETA: 16:00</span>
+</div>
+</div>
+</div>
+<!-- Guest 3 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold">
+                            ML
+                        </div>
+<div class="flex-1">
+<h4 class="font-body font-medium text-sm text-on-surface">Marcus Laurent</h4>
+<p class="text-xs text-on-surface-variant mt-0.5">Prague Old Town • Standard King</p>
+<div class="flex gap-2 mt-2">
+<span class="text-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> ETA: 18:15</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant/50 bg-surface-container-low/50 text-center">
+<a class="text-sm font-medium text-primary hover:underline" href="#">View All Arrivals</a>
+</div>
+</div>
+</div>
+<!-- Data Table: Recent Bookings -->
+<section class="bg-surface rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-outline-variant/50 flex justify-between items-center">
+<h3 class="font-headline font-semibold text-lg text-on-surface">Recent Bookings</h3>
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body text-sm">
+<thead class="bg-surface-container-low/50 text-on-surface-variant text-xs uppercase tracking-wider font-semibold border-b border-outline-variant/50">
+<tr>
+<th class="px-6 py-4 font-medium">Reference</th>
+<th class="px-6 py-4 font-medium">Guest Name</th>
+<th class="px-6 py-4 font-medium">Property</th>
+<th class="px-6 py-4 font-medium">Room Type</th>
+<th class="px-6 py-4 font-medium">Dates</th>
+<th class="px-6 py-4 font-medium text-right">Value</th>
+<th class="px-6 py-4 font-medium text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30 text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-medium text-primary">#MH-8924</td>
+<td class="px-6 py-4 font-medium">Sophie Bennett</td>
+<td class="px-6 py-4">Lisbon Riverside</td>
+<td class="px-6 py-4 text-on-surface-variant">Ocean View Suite</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 12 - Oct 16</td>
+<td class="px-6 py-4 font-medium text-right">€1,450</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                                    Confirmed
+                                </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-medium text-primary">#MH-8923</td>
+<td class="px-6 py-4 font-medium">David Chen</td>
+<td class="px-6 py-4">Zurich Alpine</td>
+<td class="px-6 py-4 text-on-surface-variant">Standard King</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 14 - Oct 15</td>
+<td class="px-6 py-4 font-medium text-right">€380</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium bg-accent-gold/10 text-accent-gold rounded-full border border-accent-gold/20">
+                                    Pending
+                                </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-medium text-primary">#MH-8922</td>
+<td class="px-6 py-4 font-medium">Elena Rostova</td>
+<td class="px-6 py-4">Santorini Cliffside</td>
+<td class="px-6 py-4 text-on-surface-variant">Villa with Pool</td>
+<td class="px-6 py-4 text-on-surface-variant">Nov 02 - Nov 09</td>
+<td class="px-6 py-4 font-medium text-right">€4,200</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                                    Confirmed
+                                </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors opacity-60">
+<td class="px-6 py-4 font-medium text-primary">#MH-8921</td>
+<td class="px-6 py-4 font-medium line-through">James Wilson</td>
+<td class="px-6 py-4">Prague Old Town</td>
+<td class="px-6 py-4 text-on-surface-variant">Superior Twin</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 10 - Oct 12</td>
+<td class="px-6 py-4 font-medium text-right">€420</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium bg-accent-red/10 text-accent-red rounded-full">
+                                    Cancelled
+                                </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-medium text-primary">#MH-8920</td>
+<td class="px-6 py-4 font-medium">Akihiro Sato</td>
+<td class="px-6 py-4">Tel Aviv Marina</td>
+<td class="px-6 py-4 text-on-surface-variant">Executive Suite</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 08 - Oct 10</td>
+<td class="px-6 py-4 font-medium text-right">€950</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-1 text-xs font-medium bg-surface-container-low text-on-surface-variant rounded-full border border-outline-variant">
+                                    Checked-out
+                                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline-variant/50 bg-surface flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Showing 1-5 of 143 bookings</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface-variant disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface-variant">Next</button>
+</div>
+</div>
+</section>
+</main>
+</body></html>
