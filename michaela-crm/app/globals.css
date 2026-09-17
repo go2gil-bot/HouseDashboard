@@ -21,7 +21,9 @@
 
   --gold: #c9a227;
   --gold-soft: #f7f0da;
-  --gold-ink: #8a6d10;
+  /* Darkened from the original #8a6d10, which was 4.31:1 on gold-soft —
+     under the 4.5:1 the 12px status pills need. 5.31:1 here. */
+  --gold-ink: #7a5f0d;
 
   --danger-soft: #fef2f2;
   --danger-ink: #b91c1c;
