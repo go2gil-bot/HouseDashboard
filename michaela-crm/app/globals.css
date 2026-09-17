@@ -19,7 +19,9 @@
   --teal-soft: #e6efee;
   --on-teal: #ffffff;
 
-  --gold: #c9a227;
+  /* Darkened from the original #c9a227, which was 2.30:1 against the page —
+     under the 3:1 a border that carries meaning needs. 3.30:1 here. */
+  --gold: #a8851f;
   --gold-soft: #f7f0da;
   /* Darkened from the original #8a6d10, which was 4.31:1 on gold-soft —
      under the 4.5:1 the 12px status pills need. 5.31:1 here. */
